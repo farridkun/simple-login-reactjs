@@ -7,8 +7,8 @@ import axios from 'axios';
 const Login = (props) => {
   let history = useHistory();
 
-  // const url = 'https://team-c-be-binar8.nandaworks.com/auth/login';
-  const url = 'https://5fa178342541640016b6b13b.mockapi.io/api/v1/login';
+  const url = 'https://team-c-be-binar8.nandaworks.com/auth/login';
+  // const url = 'https://5fa178342541640016b6b13b.mockapi.io/api/v1/login';
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,6 +19,14 @@ const Login = (props) => {
       username: username,
       password: password
     };
+
+    // axios.post(url, data).then((res) => {
+    //   if (res.data.token) {
+    //     Cookies.set('token', res.data.token, { expires: 1 });
+    //     history.push('/');
+    //   }
+    // });
+
     axios.post(url, data).then((res) => {
       console.log(res.data);
       const { username, role, token } = res.data;
@@ -27,6 +35,7 @@ const Login = (props) => {
       Cookies.set('token', token, { expires: 1 });
       history.push('/');
     });
+
     // jika di klik login, set cookies token
     // Cookies.set("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
     // history.push("/");
@@ -35,6 +44,8 @@ const Login = (props) => {
   const handleLogout = () => {
     // jika di klik logout, remove cookies token
     Cookies.remove('token');
+    Cookies.remove('username');
+    Cookies.remove('role');
     history.push('/');
   };
 
@@ -45,11 +56,16 @@ const Login = (props) => {
         <>
           <form onSubmit={handleLogin}>
             Username: <br />
-            <input type="text" onChange={(e) => setUsername(e.target.value)} />
+            <input
+              type="text"
+              autoComplete="new-text"
+              onChange={(e) => setUsername(e.target.value)}
+            />
             <br />
             Password: <br />
             <input
               type="password"
+              autoComplete="new-password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <br />

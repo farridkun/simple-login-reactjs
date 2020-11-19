@@ -4,6 +4,7 @@ import { checkLogin, checkAdmin } from '../Helper';
 
 const Home = () => {
   const username = Cookies.get('username');
+
   const renderMsg = () => {
     if (!checkLogin()) {
       return <p>Belum Login!</p>;
@@ -12,11 +13,11 @@ const Home = () => {
     }
   };
 
-  const renderStatus = () => {
-    if (checkAdmin()) {
-      return <p>Ini Admin</p>;
+  const renderAdmin = () => {
+    if (!checkAdmin()) {
+      return <p>Sebagai User!</p>;
     } else {
-      return <p>Ini Bukan Admin</p>;
+      return <p>Sebagai Admin!</p>;
     }
   };
 
@@ -32,10 +33,13 @@ const Home = () => {
   return (
     <>
       <h3>Home</h3>
-
       {renderMsg()}
-      {checkLogin() && renderStatus()}
-      {checkLogin() && <b>{username}</b>}
+      {checkLogin() && (
+        <p>
+          Hi, <b>{username}</b>
+        </p>
+      )}
+      {checkLogin() && renderAdmin()}
       {checkLogin() && renderFormReview()}
     </>
   );

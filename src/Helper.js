@@ -11,11 +11,11 @@ export function checkLogin() {
 }
 
 export function checkAdmin() {
-  if (typeof Cookies.get('role') === 'admin') {
+  if (Cookies.get('role') === 'admin') {
     // console.log("Bukan Admin");
-    return false;
+    return true;
   } else {
     // console.log("Admin");
-    return true;
+    return false;
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { checkLogin } from '../Helper';
+import { checkAdmin, checkLogin } from '../Helper';
 import { Link } from 'react-router-dom';
 
 const Navigation = () => {
@@ -10,18 +10,25 @@ const Navigation = () => {
       </li>
       {checkLogin() && (
         <>
-          <li>
-            <Link to="/admin">Admin</Link>
-          </li>
+          {checkAdmin() && (
+            <li>
+              <Link to="/admin">Admin</Link>
+            </li>
+          )}
           <li>
             <Link to="/logout">Logout</Link>
           </li>
         </>
       )}
       {!checkLogin() && (
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
+        <>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </>
       )}
     </ul>
   );

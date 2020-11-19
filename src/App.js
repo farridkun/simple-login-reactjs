@@ -5,6 +5,7 @@ import Login from './page/Login';
 import Logout from './page/Logout';
 import Admin from './page/Admin';
 import Home from './page/Home';
+import Register from './page/Register';
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
       <Navigation />
 
       <Switch>
+        <Route path="/register">
+          <Register />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
